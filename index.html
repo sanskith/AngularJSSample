@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+  </head>
+  <body>
+    <h2>Todo</h2>
+    <div ng-app="myApp" ng-controller="customCtrl">
+<table border="1">
+    <thead>
+      <tr>
+        <th ng-repeat="(header, value) in todos[0]">
+          {{header}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in todos">
+        <td ng-repeat="cell in row">
+          {{cell}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customCtrl', function($scope, $http) {
+    $http.get("http://localhost:8080/todos")
+    .success(function(response) {$scope.todos = response;});
+});
+</script>
+  </body>
+</html>
